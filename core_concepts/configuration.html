@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+
+<html :class="{'dark': darkMode === 'dark' || (darkMode === 'system' &amp;&amp; window.matchMedia('(prefers-color-scheme: dark)').matches)}" class="scroll-smooth" data-content_root="../" lang="en" x-data="{ darkMode: localStorage.getItem('darkMode') || localStorage.setItem('darkMode', 'system'), activeSection: '' }" x-init="$watch('darkMode', val =&gt; localStorage.setItem('darkMode', val))">
+<head>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta charset="utf-8"/>
+<meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
+<meta content="black" media="(prefers-color-scheme: dark)" name="theme-color"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Configuration | ell  documentation</title>
+<meta content="Configuration | ell  documentation" property="og:title"/>
+<meta content="Configuration | ell  documentation" name="twitter:title"/>
+<link href="../_static/pygments.css?v=5cc6ec80" rel="stylesheet" type="text/css"/>
+<link href="../_static/theme.css?v=ecdfb4fc" rel="stylesheet" type="text/css"/>
+<link href="../_static/autodoc_pydantic.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/favicon.ico" rel="icon"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../reference/index.html" rel="next" title="ell package"/>
+<link href="models_and_api_clients.html" rel="prev" title="Models &amp; API Clients"/>
+<script>
+    <!-- Prevent Flash of wrong theme -->
+      const userPreference = localStorage.getItem('darkMode');
+      let mode;
+      if (userPreference === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        mode = 'dark';
+        document.documentElement.classList.add('dark');
+      } else {
+        mode = 'light';
+      }
+      if (!userPreference) {localStorage.setItem('darkMode', mode)}
+    </script>
+
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-220ZB10X27"></script>
+<script>
+  if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-220ZB10X27');
+  }
+</script>
+<style>
+    .rounded-image {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+</style>
+<script>
+function invertImage(dark) {
+    var images = document.querySelectorAll('.invertible-image img');
+    var htmlElement = document.documentElement;
+    images.forEach(function(image) {
+        if (!dark) {
+            image.style.filter = 'invert(100%) hue-rotate(160deg)';
+        } else {
+            image.style.filter = 'none';
+        }
+    });
+}
+
+
+
+// Run when the 'dark' class is added or removed from the <html> element
+const htmlElement = document.documentElement;
+
+// Use MutationObserver to detect changes in the class attribute
+const observer = new MutationObserver((mutations) => {
+console.log(document.documentElement.classList)
+    mutations.forEach((mutation) => {
+            invertImage(document.documentElement.classList.contains('dark'));
+
+    });
+});
+
+observer.observe(htmlElement, { attributes: true, attributeFilter: ['class'] });
+</script>
+
+<meta content="https://docs.ell.so/" property="og:url"/>
+<meta content="ell is a lightweight prompt engineering library treating prompts as functions. It provides tools for versioning, monitoring, and visualization of language model programs." property="og:description"/>
+<meta content="https://docs.ell.so/_static/og2.png" property="og:image"/>
+
+<meta content="summary_large_image" property="twitter:card"/>
+<meta content="ell is a lightweight prompt engineering library treating prompts as functions. It provides tools for versioning, monitoring, and visualization of language model programs." property="twitter:description"/>
+
+<meta content="ell is a lightweight prompt engineering library treating prompts as functions. It provides tools for versioning, monitoring, and visualization of language model programs." name="description"/>
+<meta content="ell, language model programming, prompt engineering, LLM, AI, machine learning, GPT" name="keywords"/>
+<meta content="William Guss" name="author"/>
+</head>
+<body :class="{ 'overflow-hidden': showSidebar }" class="min-h-screen font-sans antialiased bg-background text-foreground" x-data="{ showSidebar: false }">
+<div @click.self="showSidebar = false" class="fixed inset-0 z-50 overflow-hidden bg-background/80 backdrop-blur-sm md:hidden" x-cloak="" x-show="showSidebar"></div><div class="relative flex flex-col min-h-screen" id="page"><a class="absolute top-0 left-0 z-[100] block bg-background p-4 text-xl transition -translate-x-full opacity-0 focus:translate-x-0 focus:opacity-100" href="#content">
+      Skip to content
+    </a><header class="sticky top-0 z-40 w-full border-b shadow-sm border-border supports-backdrop-blur:bg-background/60 bg-background/95 backdrop-blur"><div class="container flex items-center h-14">
+<div class="hidden mr-4 md:flex">
+<a class="flex items-center mr-6" href="../index.html">
+<img alt="Logo" class="mr-2 hidden dark:block" height="24" src="../_static/ell-wide-dark.png" width="120"/>
+<img alt="Logo" class="mr-2 dark:hidden" height="24" src="../_static/ell-wide-light.png" width="120"/></a>
+<nav class="flex items-center space-x-6 text-sm font-medium">
+<a class="transition-colors hover:text-foreground/80 text-foreground/60" href="../index.html">Docs</a>
+<a class="transition-colors hover:text-foreground/80 text-foreground/60" href="../reference/index.html">API Reference</a>
+<a class="transition-colors hover:text-foreground/80 text-foreground/60" href="https://jobs.ell.so" rel="noopener nofollow">AI Jobs Board</a>
+</nav></div><button @click="showSidebar = true" class="inline-flex items-center justify-center h-10 px-0 py-2 mr-2 text-base font-medium transition-colors rounded-md hover:text-accent-foreground hover:bg-transparent md:hidden" type="button">
+<svg aria-hidden="true" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M152.587 825.087q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440Zm0-203.587q-19.152 0-32.326-13.174T107.087 576q0-19.152 13.174-32.326t32.326-13.174h320q19.152 0 32.326 13.174T518.087 576q0 19.152-13.174 32.326T472.587 621.5h-320Zm0-203.587q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440ZM708.913 576l112.174 112.174q12.674 12.674 12.674 31.826t-12.674 31.826Q808.413 764.5 789.261 764.5t-31.826-12.674l-144-144Q600 594.391 600 576t13.435-31.826l144-144q12.674-12.674 31.826-12.674t31.826 12.674q12.674 12.674 12.674 31.826t-12.674 31.826L708.913 576Z"></path>
+</svg>
+<span class="sr-only">Toggle navigation menu</span>
+</button>
+<div class="flex items-center justify-between flex-1 space-x-2 sm:space-x-4 md:justify-end">
+<div class="flex-1 w-full md:w-auto md:flex-none"><form @keydown.k.window.meta="$refs.search.focus()" action="../search.html" class="relative flex items-center group" id="searchbox" method="get">
+<input aria-label="Search the docs" class="inline-flex items-center font-medium transition-colors bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background border border-input hover:bg-accent focus:bg-accent hover:text-accent-foreground focus:text-accent-foreground hover:placeholder-accent-foreground py-2 px-4 relative h-9 w-full justify-start rounded-[0.5rem] text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64" id="search-input" name="q" placeholder="Search ..." type="search" x-ref="search"/>
+<kbd class="pointer-events-none absolute right-1.5 top-2 hidden h-5 select-none text-muted-foreground items-center gap-1 rounded border border-border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex group-hover:bg-accent group-hover:text-accent-foreground">
+<span class="text-xs">⌘</span>
+    K
+  </kbd>
+</form>
+</div>
+<nav class="flex items-center space-x-1">
+<a href="https://discord.gg/vWntgU52Xb" rel="noopener nofollow" title="Visit Discord">
+<div class="inline-flex items-center justify-center px-0 text-sm font-medium transition-colors rounded-md disabled:opacity-50 disabled:pointer-events-none hover:bg-accent hover:text-accent-foreground h-9 w-9">
+<svg fill="currentColor" height="18" viewbox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><path d="M524.5 69.8a1.5 1.5 0 0 0 -.8-.7A485.1 485.1 0 0 0 404.1 32a1.8 1.8 0 0 0 -1.9 .9 337.5 337.5 0 0 0 -14.9 30.6 447.8 447.8 0 0 0 -134.4 0 309.5 309.5 0 0 0 -15.1-30.6 1.9 1.9 0 0 0 -1.9-.9A483.7 483.7 0 0 0 116.1 69.1a1.7 1.7 0 0 0 -.8 .7C39.1 183.7 18.2 294.7 28.4 404.4a2 2 0 0 0 .8 1.4A487.7 487.7 0 0 0 176 479.9a1.9 1.9 0 0 0 2.1-.7A348.2 348.2 0 0 0 208.1 430.4a1.9 1.9 0 0 0 -1-2.6 321.2 321.2 0 0 1 -45.9-21.9 1.9 1.9 0 0 1 -.2-3.1c3.1-2.3 6.2-4.7 9.1-7.1a1.8 1.8 0 0 1 1.9-.3c96.2 43.9 200.4 43.9 295.5 0a1.8 1.8 0 0 1 1.9 .2c2.9 2.4 6 4.9 9.1 7.2a1.9 1.9 0 0 1 -.2 3.1 301.4 301.4 0 0 1 -45.9 21.8 1.9 1.9 0 0 0 -1 2.6 391.1 391.1 0 0 0 30 48.8 1.9 1.9 0 0 0 2.1 .7A486 486 0 0 0 610.7 405.7a1.9 1.9 0 0 0 .8-1.4C623.7 277.6 590.9 167.5 524.5 69.8zM222.5 337.6c-29 0-52.8-26.6-52.8-59.2S193.1 219.1 222.5 219.1c29.7 0 53.3 26.8 52.8 59.2C275.3 311 251.9 337.6 222.5 337.6zm195.4 0c-29 0-52.8-26.6-52.8-59.2S388.4 219.1 417.9 219.1c29.7 0 53.3 26.8 52.8 59.2C470.7 311 447.5 337.6 417.9 337.6z"></path></svg>
+</div>
+</a>
+<button @click="darkMode = darkMode === 'light' ? 'dark' : 'light'" aria-label="Color theme switcher" class="relative inline-flex items-center justify-center px-0 text-sm font-medium transition-colors rounded-md hover:bg-accent hover:text-accent-foreground h-9 w-9" type="button">
+<svg class="absolute transition-all scale-100 rotate-0 dark:-rotate-90 dark:scale-0" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M480 685q45.456 0 77.228-31.772Q589 621.456 589 576q0-45.456-31.772-77.228Q525.456 467 480 467q-45.456 0-77.228 31.772Q371 530.544 371 576q0 45.456 31.772 77.228Q434.544 685 480 685Zm0 91q-83 0-141.5-58.5T280 576q0-83 58.5-141.5T480 376q83 0 141.5 58.5T680 576q0 83-58.5 141.5T480 776ZM80 621.5q-19.152 0-32.326-13.174T34.5 576q0-19.152 13.174-32.326T80 530.5h80q19.152 0 32.326 13.174T205.5 576q0 19.152-13.174 32.326T160 621.5H80Zm720 0q-19.152 0-32.326-13.174T754.5 576q0-19.152 13.174-32.326T800 530.5h80q19.152 0 32.326 13.174T925.5 576q0 19.152-13.174 32.326T880 621.5h-80Zm-320-320q-19.152 0-32.326-13.174T434.5 256v-80q0-19.152 13.174-32.326T480 130.5q19.152 0 32.326 13.174T525.5 176v80q0 19.152-13.174 32.326T480 301.5Zm0 720q-19.152 0-32.326-13.17Q434.5 995.152 434.5 976v-80q0-19.152 13.174-32.326T480 850.5q19.152 0 32.326 13.174T525.5 896v80q0 19.152-13.174 32.33-13.174 13.17-32.326 13.17ZM222.174 382.065l-43-42Q165.5 327.391 166 308.239t13.174-33.065q13.435-13.674 32.587-13.674t32.065 13.674l42.239 43q12.674 13.435 12.555 31.706-.12 18.272-12.555 31.946-12.674 13.674-31.445 13.413-18.772-.261-32.446-13.174Zm494 494.761-42.239-43q-12.674-13.435-12.674-32.087t12.674-31.565Q686.609 756.5 705.38 757q18.772.5 32.446 13.174l43 41.761Q794.5 824.609 794 843.761t-13.174 33.065Q767.391 890.5 748.239 890.5t-32.065-13.674Zm-42-494.761Q660.5 369.391 661 350.62q.5-18.772 13.174-32.446l41.761-43Q728.609 261.5 747.761 262t33.065 13.174q13.674 13.435 13.674 32.587t-13.674 32.065l-43 42.239q-13.435 12.674-31.706 12.555-18.272-.12-31.946-12.555Zm-495 494.761Q165.5 863.391 165.5 844.239t13.674-32.065l43-42.239q13.435-12.674 32.087-12.674t31.565 12.674Q299.5 782.609 299 801.38q-.5 18.772-13.174 32.446l-41.761 43Q231.391 890.5 212.239 890t-33.065-13.174ZM480 576Z"></path>
+</svg>
+<svg class="absolute transition-all scale-0 rotate-90 dark:rotate-0 dark:scale-100" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M480 936q-151 0-255.5-104.5T120 576q0-138 90-239.5T440 218q25-3 39 18t-1 44q-17 26-25.5 55t-8.5 61q0 90 63 153t153 63q31 0 61.5-9t54.5-25q21-14 43-1.5t19 39.5q-14 138-117.5 229T480 936Zm0-80q88 0 158-48.5T740 681q-20 5-40 8t-40 3q-123 0-209.5-86.5T364 396q0-20 3-40t8-40q-78 32-126.5 102T200 576q0 116 82 198t198 82Zm-10-270Z"></path>
+</svg>
+</button>
+</nav>
+</div>
+</div>
+</header>
+<div class="flex-1"><div class="container flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10"><aside :aria-hidden="!showSidebar" :class="{ 'translate-x-0': showSidebar }" class="fixed inset-y-0 left-0 md:top-14 z-50 md:z-30 bg-background md:bg-transparent transition-all duration-100 -translate-x-full md:translate-x-0 ml-0 p-6 md:p-0 md:-ml-2 md:h-[calc(100vh-3.5rem)] w-5/6 md:w-full shrink-0 overflow-y-auto border-r border-border md:sticky" id="left-sidebar">
+<a class="!justify-start text-sm md:!hidden bg-background" href="../index.html">
+<img alt="Logo" class="mr-2 hidden dark:block" height="16" src="../_static/ell-wide-dark.png" width="16"/>
+<img alt="Logo" class="mr-2 dark:hidden" height="16" src="../_static/ell-wide-light.png" width="16"/><span class="font-bold text-clip whitespace-nowrap">ell  documentation</span>
+</a>
+<div class="relative overflow-hidden md:overflow-auto my-4 md:my-0 h-[calc(100vh-8rem)] md:h-auto">
+<div class="overflow-y-auto h-full w-full relative pr-6"><nav class="flex md:hidden flex-col font-medium mt-4">
+<a href="../index.html">Docs</a>
+<a href="../reference/index.html">API Reference</a>
+<a href="https://jobs.ell.so" rel="nofollow noopener">AI Jobs Board</a>
+</nav><nav class="table w-full min-w-full my-6 lg:my-8">
+<p class="caption" role="heading"><span class="caption-text">The Basics:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Core Concepts:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ell_simple.html">@ell.simple</a></li>
+<li class="toctree-l1"><a class="reference internal" href="versioning_and_storage.html">Versioning &amp; Tracing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ell_studio.html">Studio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="message_api.html">Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ell_complex.html">@ell.complex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tool_usage.html">Tool Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="structured_outputs.html">Structured Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multimodality.html">Multimodality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models_and_api_clients.html">Models &amp; API Clients</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Configuration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">ell package</a></li>
+</ul>
+</nav>
+</div>
+</div>
+<button @click="showSidebar = false" class="absolute md:hidden right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100" type="button">
+<svg class="h-4 w-4" fill="currentColor" height="24" stroke="none" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M480 632 284 828q-11 11-28 11t-28-11q-11-11-11-28t11-28l196-196-196-196q-11-11-11-28t11-28q11-11 28-11t28 11l196 196 196-196q11-11 28-11t28 11q11 11 11 28t-11 28L536 576l196 196q11 11 11 28t-11 28q-11 11-28 11t-28-11L480 632Z"></path>
+</svg>
+</button>
+</aside>
+<main class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
+<div class="w-full min-w-0 mx-auto">
+<nav aria-label="breadcrumbs" class="flex items-center mb-4 space-x-1 text-sm text-muted-foreground">
+<a class="overflow-hidden text-ellipsis whitespace-nowrap hover:text-foreground" href="../index.html">
+<span class="hidden md:inline">ell  documentation</span>
+<svg aria-label="Home" class="md:hidden" fill="currentColor" height="18" stroke="none" viewbox="0 96 960 960" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z"></path>
+</svg>
+</a>
+<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">Configuration</span>
+</nav>
+<div id="content" role="main">
+<section id="configuration">
+<h1>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">¶</a></h1>
+<p>ell provides various configuration options to customize its behavior.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="ell.init">
+<span class="sig-prename descclassname"><span class="pre">ell.</span></span><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">store</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Store</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">autocommit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy_versioning</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_lm_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_system_prompt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_openai_client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">OpenAI</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ell.init" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#ell.init'">¶</a></dt>
+<dd><p>Initialize the ELL configuration with various settings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>verbose</strong> (<em>bool</em>) – Set verbosity of ELL operations.</p></li>
+<li><p><strong>store</strong> (<em>Union</em><em>[</em><em>Store</em><em>, </em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Set the store for ELL. Can be a Store instance or a string path for SQLiteStore.</p></li>
+<li><p><strong>autocommit</strong> (<em>bool</em>) – Set autocommit for the store operations.</p></li>
+<li><p><strong>lazy_versioning</strong> (<em>bool</em>) – Enable or disable lazy versioning.</p></li>
+<li><p><strong>default_lm_params</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em><em>, </em><em>optional</em>) – Set default parameters for language models.</p></li>
+<li><p><strong>default_system_prompt</strong> (<em>str</em><em>, </em><em>optional</em>) – Set the default system prompt.</p></li>
+<li><p><strong>default_openai_client</strong> (<em>openai.Client</em><em>, </em><em>optional</em>) – Set the default OpenAI client.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<p>This <code class="docutils literal notranslate"><span class="pre">init</span></code> function is a convenience function that sets up the configuration for ell. It is a thin wrapper around the <code class="docutils literal notranslate"><span class="pre">Config</span></code> class, which is a Pydantic model.</p>
+<p>You can modify the global configuration using the <code class="docutils literal notranslate"><span class="pre">ell.config</span></code> object which is an instance of <code class="docutils literal notranslate"><span class="pre">Config</span></code>:</p>
+<dl class="py class pydantic_model">
+<dt class="sig sig-object py" id="ell.Config">
+<em class="property"><span class="pre">pydantic</span> <span class="pre">model</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ell.</span></span><span class="sig-name descname"><span class="pre">Config</span></span><a class="headerlink" href="#ell.Config" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#ell.Config'">¶</a></dt>
+<dd><dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="ell.Config.autocommit">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">autocommit</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#ell.Config.autocommit" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#ell.Config.autocommit'">¶</a></dt>
+<dd><p>If True, enables automatic committing of changes to the store.</p>
+</dd></dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="ell.Config.default_lm_params">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">default_lm_params</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">[Optional]</span></em><a class="headerlink" href="#ell.Config.default_lm_params" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#ell.Config.default_lm_params'">¶</a></dt>
+<dd><p>Default parameters for language models.</p>
+</dd></dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="ell.Config.default_system_prompt">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">default_system_prompt</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'You</span> <span class="pre">are</span> <span class="pre">a</span> <span class="pre">helpful</span> <span class="pre">AI</span> <span class="pre">assistant.'</span></em><a class="headerlink" href="#ell.Config.default_system_prompt" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#ell.Config.default_system_prompt'">¶</a></dt>
+<dd><p>The default system prompt used for AI interactions.</p>
+</dd></dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="ell.Config.lazy_versioning">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lazy_versioning</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#ell.Config.lazy_versioning" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#ell.Config.lazy_versioning'">¶</a></dt>
+<dd><p>If True, enables lazy versioning for improved performance.</p>
+</dd></dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="ell.Config.override_wrapped_logging_width">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">override_wrapped_logging_width</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ell.Config.override_wrapped_logging_width" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#ell.Config.override_wrapped_logging_width'">¶</a></dt>
+<dd><p>If set, overrides the default width for wrapped logging.</p>
+</dd></dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="ell.Config.verbose">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">verbose</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#ell.Config.verbose" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#ell.Config.verbose'">¶</a></dt>
+<dd><p>If True, enables verbose logging.</p>
+</dd></dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="ell.Config.wrapped_logging">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">wrapped_logging</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#ell.Config.wrapped_logging" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#ell.Config.wrapped_logging'">¶</a></dt>
+<dd><p>If True, enables wrapped logging for better readability.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ell.Config.get_client_for">
+<span class="sig-name descname"><span class="pre">get_client_for</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">OpenAI</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#ell.Config.get_client_for" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#ell.Config.get_client_for'">¶</a></dt>
+<dd><p>Get the OpenAI client for a specific model name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model_name</strong> (<em>str</em>) – The name of the model to get the client for.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The OpenAI client for the specified model, or None if not found.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Optional[openai.Client]</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ell.Config.get_store">
+<span class="sig-name descname"><span class="pre">get_store</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Store</span></span></span><a class="headerlink" href="#ell.Config.get_store" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#ell.Config.get_store'">¶</a></dt>
+<dd><p>Get the current store.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The current store.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Store</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ell.Config.model_registry_override">
+<span class="sig-name descname"><span class="pre">model_registry_override</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">overrides</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">OpenAI</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ell.Config.model_registry_override" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#ell.Config.model_registry_override'">¶</a></dt>
+<dd><p>Temporarily override the model registry with new client mappings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>overrides</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>openai.Client</em><em>]</em>) – A dictionary of model names to OpenAI clients to override.</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ell.Config.register_model">
+<span class="sig-name descname"><span class="pre">register_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">OpenAI</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ell.Config.register_model" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#ell.Config.register_model'">¶</a></dt>
+<dd><p>Register an OpenAI client for a specific model name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model_name</strong> (<em>str</em>) – The name of the model to register.</p></li>
+<li><p><strong>client</strong> (<em>openai.Client</em>) – The OpenAI client to associate with the model.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ell.Config.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ell.Config.reset" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#ell.Config.reset'">¶</a></dt>
+<dd><p>Reset the configuration to its initial state.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ell.Config.set_default_client">
+<span class="sig-name descname"><span class="pre">set_default_client</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">OpenAI</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ell.Config.set_default_client" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#ell.Config.set_default_client'">¶</a></dt>
+<dd><p>Set the default OpenAI client.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>client</strong> (<em>openai.Client</em>) – The default OpenAI client to set.</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ell.Config.set_default_lm_params">
+<span class="sig-name descname"><span class="pre">set_default_lm_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ell.Config.set_default_lm_params" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#ell.Config.set_default_lm_params'">¶</a></dt>
+<dd><p>Set default parameters for language models.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>params</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – Keyword arguments representing the default parameters.</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ell.Config.set_default_system_prompt">
+<span class="sig-name descname"><span class="pre">set_default_system_prompt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prompt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ell.Config.set_default_system_prompt" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#ell.Config.set_default_system_prompt'">¶</a></dt>
+<dd><p>Set the default system prompt.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>prompt</strong> (<em>str</em>) – The default system prompt to set.</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ell.Config.set_store">
+<span class="sig-name descname"><span class="pre">set_store</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">store</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Store</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">autocommit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ell.Config.set_store" title="Link to this definition" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#ell.Config.set_store'">¶</a></dt>
+<dd><p>Set the store for the configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>store</strong> (<em>Union</em><em>[</em><em>Store</em><em>, </em><em>str</em><em>]</em>) – The store to set. Can be a Store instance or a string path for SQLiteStore.</p></li>
+<li><p><strong>autocommit</strong> (<em>bool</em>) – Whether to enable autocommit for the store.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+</section>
+</div><div class="flex justify-between items-center pt-6 mt-12 border-t border-border gap-4">
+<div class="mr-auto">
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="models_and_api_clients.html">
+<svg class="mr-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<polyline points="15 18 9 12 15 6"></polyline>
+</svg>
+        Models &amp; API Clients
+      </a>
+</div>
+<div class="ml-auto">
+<a class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4" href="../reference/index.html">
+        ell package
+        <svg class="ml-2 h-4 w-4" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<polyline points="9 18 15 12 9 6"></polyline>
+</svg>
+</a>
+</div>
+</div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
+<div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
+<ul>
+<li><a :data-current="activeSection === '#ell.init'" class="reference internal" href="#ell.init"><code class="docutils literal notranslate"><span class="pre">init()</span></code></a></li>
+<li><a :data-current="activeSection === '#ell.Config'" class="reference internal" href="#ell.Config"><code class="docutils literal notranslate"><span class="pre">Config</span></code></a><ul>
+<li><a :data-current="activeSection === '#ell.Config.autocommit'" class="reference internal" href="#ell.Config.autocommit"><code class="docutils literal notranslate"><span class="pre">Config.autocommit</span></code></a></li>
+<li><a :data-current="activeSection === '#ell.Config.default_lm_params'" class="reference internal" href="#ell.Config.default_lm_params"><code class="docutils literal notranslate"><span class="pre">Config.default_lm_params</span></code></a></li>
+<li><a :data-current="activeSection === '#ell.Config.default_system_prompt'" class="reference internal" href="#ell.Config.default_system_prompt"><code class="docutils literal notranslate"><span class="pre">Config.default_system_prompt</span></code></a></li>
+<li><a :data-current="activeSection === '#ell.Config.lazy_versioning'" class="reference internal" href="#ell.Config.lazy_versioning"><code class="docutils literal notranslate"><span class="pre">Config.lazy_versioning</span></code></a></li>
+<li><a :data-current="activeSection === '#ell.Config.override_wrapped_logging_width'" class="reference internal" href="#ell.Config.override_wrapped_logging_width"><code class="docutils literal notranslate"><span class="pre">Config.override_wrapped_logging_width</span></code></a></li>
+<li><a :data-current="activeSection === '#ell.Config.verbose'" class="reference internal" href="#ell.Config.verbose"><code class="docutils literal notranslate"><span class="pre">Config.verbose</span></code></a></li>
+<li><a :data-current="activeSection === '#ell.Config.wrapped_logging'" class="reference internal" href="#ell.Config.wrapped_logging"><code class="docutils literal notranslate"><span class="pre">Config.wrapped_logging</span></code></a></li>
+<li><a :data-current="activeSection === '#ell.Config.get_client_for'" class="reference internal" href="#ell.Config.get_client_for"><code class="docutils literal notranslate"><span class="pre">Config.get_client_for()</span></code></a></li>
+<li><a :data-current="activeSection === '#ell.Config.get_store'" class="reference internal" href="#ell.Config.get_store"><code class="docutils literal notranslate"><span class="pre">Config.get_store()</span></code></a></li>
+<li><a :data-current="activeSection === '#ell.Config.model_registry_override'" class="reference internal" href="#ell.Config.model_registry_override"><code class="docutils literal notranslate"><span class="pre">Config.model_registry_override()</span></code></a></li>
+<li><a :data-current="activeSection === '#ell.Config.register_model'" class="reference internal" href="#ell.Config.register_model"><code class="docutils literal notranslate"><span class="pre">Config.register_model()</span></code></a></li>
+<li><a :data-current="activeSection === '#ell.Config.reset'" class="reference internal" href="#ell.Config.reset"><code class="docutils literal notranslate"><span class="pre">Config.reset()</span></code></a></li>
+<li><a :data-current="activeSection === '#ell.Config.set_default_client'" class="reference internal" href="#ell.Config.set_default_client"><code class="docutils literal notranslate"><span class="pre">Config.set_default_client()</span></code></a></li>
+<li><a :data-current="activeSection === '#ell.Config.set_default_lm_params'" class="reference internal" href="#ell.Config.set_default_lm_params"><code class="docutils literal notranslate"><span class="pre">Config.set_default_lm_params()</span></code></a></li>
+<li><a :data-current="activeSection === '#ell.Config.set_default_system_prompt'" class="reference internal" href="#ell.Config.set_default_system_prompt"><code class="docutils literal notranslate"><span class="pre">Config.set_default_system_prompt()</span></code></a></li>
+<li><a :data-current="activeSection === '#ell.Config.set_store'" class="reference internal" href="#ell.Config.set_store"><code class="docutils literal notranslate"><span class="pre">Config.set_store()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</aside>
+</main>
+</div>
+</div><footer class="py-6 border-t border-border md:py-0">
+<div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
+<div class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
+<p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2024, William Guss Built with <a class="font-medium underline underline-offset-4" href="https://www.sphinx-doc.org" rel="noreferrer">Sphinx 7.2.6</a></p>
+</div>
+</div>
+</footer>
+</div>
+<script src="../_static/documentation_options.js?v=5929fcd5"></script>
+<script src="../_static/doctools.js?v=888ff710"></script>
+<script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+<script defer="defer" src="../_static/theme.js?v=e82a16a3"></script>
+</body>
+</html>

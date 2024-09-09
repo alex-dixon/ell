@@ -17,6 +17,8 @@
     <meta name="twitter:title" content="Search | ell  documentation" />
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5cc6ec80" />
       <link rel="stylesheet" type="text/css" href="_static/theme.css?v=ecdfb4fc" />
+      <link rel="stylesheet" type="text/css" href="_static/autodoc_pydantic.css" />
+      <link rel="icon" href="_static/favicon.ico" />
         <link rel="search" title="Search" href="#" />
         <link rel="index" title="Index" href="genindex.html" />
 
@@ -32,6 +34,73 @@
       }
       if (!userPreference) {localStorage.setItem('darkMode', mode)}
     </script>
+  
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-220ZB10X27"></script>
+<script>
+  if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-220ZB10X27');
+  }
+</script>
+
+
+<style>
+    .rounded-image {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+</style>
+
+<script>
+function invertImage(dark) {
+    var images = document.querySelectorAll('.invertible-image img');
+    var htmlElement = document.documentElement;
+    images.forEach(function(image) {
+        if (!dark) {
+            image.style.filter = 'invert(100%) hue-rotate(160deg)';
+        } else {
+            image.style.filter = 'none';
+        }
+    });
+}
+
+
+
+// Run when the 'dark' class is added or removed from the <html> element
+const htmlElement = document.documentElement;
+
+// Use MutationObserver to detect changes in the class attribute
+const observer = new MutationObserver((mutations) => {
+console.log(document.documentElement.classList)
+    mutations.forEach((mutation) => {
+            invertImage(document.documentElement.classList.contains('dark'));
+
+    });
+});
+
+observer.observe(htmlElement, { attributes: true, attributeFilter: ['class'] });
+</script>
+
+<!-- Open Graph / Facebook -->
+<meta property="og:url" content="https://docs.ell.so/">
+<meta property="og:description" content="ell is a lightweight prompt engineering library treating prompts as functions. It provides tools for versioning, monitoring, and visualization of language model programs.">
+<meta property="og:image" content="https://docs.ell.so/_static/og2.png">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:description" content="ell is a lightweight prompt engineering library treating prompts as functions. It provides tools for versioning, monitoring, and visualization of language model programs.">
+
+<!-- Additional SEO tags -->
+<meta name="description" content="ell is a lightweight prompt engineering library treating prompts as functions. It provides tools for versioning, monitoring, and visualization of language model programs.">
+<meta name="keywords" content="ell, language model programming, prompt engineering, LLM, AI, machine learning, GPT">
+<meta name="author" content="William Guss">
+
+
 </head>
 <body x-data="{ showSidebar: false }" class="min-h-screen font-sans antialiased bg-background text-foreground" :class="{ 'overflow-hidden': showSidebar }">
     <div x-cloak x-show="showSidebar" class="fixed inset-0 z-50 overflow-hidden bg-background/80 backdrop-blur-sm md:hidden" @click.self="showSidebar = false"></div><div id="page" class="relative flex flex-col min-h-screen"><a href="#content" class="absolute top-0 left-0 z-[100] block bg-background p-4 text-xl transition -translate-x-full opacity-0 focus:translate-x-0 focus:opacity-100">
@@ -118,26 +187,26 @@
   <a href="reference/index.html">API Reference</a>
   <a href="https://jobs.ell.so" rel="nofollow noopener">AI Jobs Board</a>
 </nav><nav class="table w-full min-w-full my-6 lg:my-8">
-  <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+  <p class="caption" role="heading"><span class="caption-text">The Basics:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started/index.html">Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="getting_started/basic_usage.html">Basic Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started/configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="core_concepts/index.html">Core Concepts in ell</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="core_concepts/language_model_programs.html">Language Model Programs (LMPs)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="core_concepts/decorators.html">Decorators in ell</a></li>
-<li class="toctree-l2"><a class="reference internal" href="core_concepts/messages_and_content_blocks.html">Messages and Content Blocks in ell</a></li>
-<li class="toctree-l2"><a class="reference internal" href="core_concepts/tools.html">Tools in ell</a></li>
+<p class="caption" role="heading"><span class="caption-text">Core Concepts:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="core_concepts/ell_simple.html">&#64;ell.simple</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core_concepts/versioning_and_storage.html">Versioning &amp; Tracing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core_concepts/ell_studio.html">Studio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core_concepts/message_api.html">Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core_concepts/ell_complex.html">&#64;ell.complex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core_concepts/tool_usage.html">Tool Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core_concepts/structured_outputs.html">Structured Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core_concepts/multimodality.html">Multimodality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core_concepts/models_and_api_clients.html">Models &amp; API Clients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core_concepts/configuration.html">Configuration</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="best_practices/designing_effective_lmps.html">Designing Effective Language Model Programs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="advanced_features/multimodal_inputs.html">Multimodal Inputs in ell</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="reference/index.html">ell package</a></li>
 </ul>

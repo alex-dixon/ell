@@ -17,6 +17,8 @@
     <meta name="twitter:title" content="Index | ell  documentation" />
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5cc6ec80" />
       <link rel="stylesheet" type="text/css" href="_static/theme.css?v=ecdfb4fc" />
+      <link rel="stylesheet" type="text/css" href="_static/autodoc_pydantic.css" />
+      <link rel="icon" href="_static/favicon.ico" />
         <link rel="search" title="Search" href="search.html" />
         <link rel="index" title="Index" href="#" />
 
@@ -32,6 +34,73 @@
       }
       if (!userPreference) {localStorage.setItem('darkMode', mode)}
     </script>
+  
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-220ZB10X27"></script>
+<script>
+  if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-220ZB10X27');
+  }
+</script>
+
+
+<style>
+    .rounded-image {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+</style>
+
+<script>
+function invertImage(dark) {
+    var images = document.querySelectorAll('.invertible-image img');
+    var htmlElement = document.documentElement;
+    images.forEach(function(image) {
+        if (!dark) {
+            image.style.filter = 'invert(100%) hue-rotate(160deg)';
+        } else {
+            image.style.filter = 'none';
+        }
+    });
+}
+
+
+
+// Run when the 'dark' class is added or removed from the <html> element
+const htmlElement = document.documentElement;
+
+// Use MutationObserver to detect changes in the class attribute
+const observer = new MutationObserver((mutations) => {
+console.log(document.documentElement.classList)
+    mutations.forEach((mutation) => {
+            invertImage(document.documentElement.classList.contains('dark'));
+
+    });
+});
+
+observer.observe(htmlElement, { attributes: true, attributeFilter: ['class'] });
+</script>
+
+<!-- Open Graph / Facebook -->
+<meta property="og:url" content="https://docs.ell.so/">
+<meta property="og:description" content="ell is a lightweight prompt engineering library treating prompts as functions. It provides tools for versioning, monitoring, and visualization of language model programs.">
+<meta property="og:image" content="https://docs.ell.so/_static/og2.png">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:description" content="ell is a lightweight prompt engineering library treating prompts as functions. It provides tools for versioning, monitoring, and visualization of language model programs.">
+
+<!-- Additional SEO tags -->
+<meta name="description" content="ell is a lightweight prompt engineering library treating prompts as functions. It provides tools for versioning, monitoring, and visualization of language model programs.">
+<meta name="keywords" content="ell, language model programming, prompt engineering, LLM, AI, machine learning, GPT">
+<meta name="author" content="William Guss">
+
+
 </head>
 <body x-data="{ showSidebar: false }" class="min-h-screen font-sans antialiased bg-background text-foreground" :class="{ 'overflow-hidden': showSidebar }">
     <div x-cloak x-show="showSidebar" class="fixed inset-0 z-50 overflow-hidden bg-background/80 backdrop-blur-sm md:hidden" @click.self="showSidebar = false"></div><div id="page" class="relative flex flex-col min-h-screen"><a href="#content" class="absolute top-0 left-0 z-[100] block bg-background p-4 text-xl transition -translate-x-full opacity-0 focus:translate-x-0 focus:opacity-100">
@@ -118,26 +187,26 @@
   <a href="reference/index.html">API Reference</a>
   <a href="https://jobs.ell.so" rel="nofollow noopener">AI Jobs Board</a>
 </nav><nav class="table w-full min-w-full my-6 lg:my-8">
-  <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+  <p class="caption" role="heading"><span class="caption-text">The Basics:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started/index.html">Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="getting_started/basic_usage.html">Basic Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started/configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="core_concepts/index.html">Core Concepts in ell</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="core_concepts/language_model_programs.html">Language Model Programs (LMPs)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="core_concepts/decorators.html">Decorators in ell</a></li>
-<li class="toctree-l2"><a class="reference internal" href="core_concepts/messages_and_content_blocks.html">Messages and Content Blocks in ell</a></li>
-<li class="toctree-l2"><a class="reference internal" href="core_concepts/tools.html">Tools in ell</a></li>
+<p class="caption" role="heading"><span class="caption-text">Core Concepts:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="core_concepts/ell_simple.html">&#64;ell.simple</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core_concepts/versioning_and_storage.html">Versioning &amp; Tracing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core_concepts/ell_studio.html">Studio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core_concepts/message_api.html">Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core_concepts/ell_complex.html">&#64;ell.complex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core_concepts/tool_usage.html">Tool Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core_concepts/structured_outputs.html">Structured Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core_concepts/multimodality.html">Multimodality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core_concepts/models_and_api_clients.html">Models &amp; API Clients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core_concepts/configuration.html">Configuration</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="best_practices/designing_effective_lmps.html">Designing Effective Language Model Programs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="advanced_features/multimodal_inputs.html">Multimodal Inputs in ell</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="reference/index.html">ell package</a></li>
 </ul>
@@ -180,6 +249,47 @@
 <div id="content" role="main">
 
   <h1 id="index">Index</h1>
+  <h2 id="A">A</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
+      <li><a href="core_concepts/message_api.html#ell.assistant">assistant() (in module ell)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
+      <li><a href="core_concepts/message_api.html#ell.Message.audios">audios (ell.Message property)</a>
+</li>
+      <li><a href="core_concepts/configuration.html#ell.Config.autocommit">autocommit (ell.Config attribute)</a>
+</li>
+  </ul></td>
+  </tr>
+      </table>
+  
+  <h2 id="C">C</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
+      <li><a href="core_concepts/message_api.html#ell.Message.call_tools_and_collect_as_message">call_tools_and_collect_as_message() (ell.Message method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
+      <li><a href="core_concepts/ell_complex.html#ell.complex">complex() (in module ell)</a>
+</li>
+  </ul></td>
+  </tr>
+      </table>
+  
+  <h2 id="D">D</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
+      <li><a href="core_concepts/configuration.html#ell.Config.default_lm_params">default_lm_params (ell.Config attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
+      <li><a href="core_concepts/configuration.html#ell.Config.default_system_prompt">default_system_prompt (ell.Config attribute)</a>
+</li>
+  </ul></td>
+  </tr>
+      </table>
+  
   <h2 id="E">E</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
@@ -194,8 +304,47 @@
   </tr>
       </table>
   
+  <h2 id="G">G</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
+      <li><a href="core_concepts/configuration.html#ell.Config.get_client_for">get_client_for() (ell.Config method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
+      <li><a href="core_concepts/configuration.html#ell.Config.get_store">get_store() (ell.Config method)</a>
+</li>
+  </ul></td>
+  </tr>
+      </table>
+  
+  <h2 id="I">I</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
+      <li><a href="core_concepts/message_api.html#ell.Message.images">images (ell.Message property)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
+      <li><a href="core_concepts/configuration.html#ell.init">init() (in module ell)</a>
+</li>
+  </ul></td>
+  </tr>
+      </table>
+  
+  <h2 id="L">L</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
+      <li><a href="core_concepts/configuration.html#ell.Config.lazy_versioning">lazy_versioning (ell.Config attribute)</a>
+</li>
+  </ul></td>
+  </tr>
+      </table>
+  
   <h2 id="M">M</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
+      <li><a href="core_concepts/configuration.html#ell.Config.model_registry_override">model_registry_override() (ell.Config method)</a>
+</li>
+  </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
       <li>
     module
@@ -208,12 +357,108 @@
   </tr>
       </table>
   
+  <h2 id="O">O</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
+      <li><a href="core_concepts/configuration.html#ell.Config.override_wrapped_logging_width">override_wrapped_logging_width (ell.Config attribute)</a>
+</li>
+  </ul></td>
+  </tr>
+      </table>
+  
+  <h2 id="P">P</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
+      <li><a href="core_concepts/message_api.html#ell.Message.parsed">parsed (ell.Message property)</a>
+</li>
+  </ul></td>
+  </tr>
+      </table>
+  
+  <h2 id="R">R</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
+      <li><a href="core_concepts/configuration.html#ell.Config.register_model">register_model() (ell.Config method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
+      <li><a href="core_concepts/configuration.html#ell.Config.reset">reset() (ell.Config method)</a>
+</li>
+  </ul></td>
+  </tr>
+      </table>
+  
+  <h2 id="S">S</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
+      <li><a href="core_concepts/configuration.html#ell.Config.set_default_client">set_default_client() (ell.Config method)</a>
+</li>
+      <li><a href="core_concepts/configuration.html#ell.Config.set_default_lm_params">set_default_lm_params() (ell.Config method)</a>
+</li>
+      <li><a href="core_concepts/configuration.html#ell.Config.set_default_system_prompt">set_default_system_prompt() (ell.Config method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
+      <li><a href="core_concepts/configuration.html#ell.Config.set_store">set_store() (ell.Config method)</a>
+</li>
+      <li><a href="core_concepts/ell_simple.html#ell.simple">simple() (in module ell)</a>
+</li>
+      <li><a href="core_concepts/message_api.html#ell.system">system() (in module ell)</a>
+</li>
+  </ul></td>
+  </tr>
+      </table>
+  
+  <h2 id="T">T</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
+      <li><a href="core_concepts/message_api.html#ell.Message.text">text (ell.Message property)</a>
+</li>
+      <li><a href="core_concepts/message_api.html#ell.Message.text_only">text_only (ell.Message property)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
+      <li><a href="core_concepts/message_api.html#ell.Message.tool_calls">tool_calls (ell.Message property)</a>
+</li>
+      <li><a href="core_concepts/message_api.html#ell.Message.tool_results">tool_results (ell.Message property)</a>
+</li>
+  </ul></td>
+  </tr>
+      </table>
+  
+  <h2 id="U">U</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
+      <li><a href="core_concepts/message_api.html#ell.user">user() (in module ell)</a>
+</li>
+  </ul></td>
+  </tr>
+      </table>
+  
+  <h2 id="V">V</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
+      <li><a href="core_concepts/configuration.html#ell.Config.verbose">verbose (ell.Config attribute)</a>
+</li>
+  </ul></td>
+  </tr>
+      </table>
+  
+  <h2 id="W">W</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul style="margin-left:0;list-style-type:none">
+      <li><a href="core_concepts/configuration.html#ell.Config.wrapped_logging">wrapped_logging (ell.Config attribute)</a>
+</li>
+  </ul></td>
+  </tr>
+      </table>
+  
 
 </div><div class="flex justify-between items-center pt-6 mt-12 border-t border-border gap-4">
 </div></div>
 <aside id="right-sidebar" class="hidden text-sm xl:block">
 <div class="sticky top-16 -mt-10 max-h-[calc(var(--vh)-4rem)] overflow-y-auto pt-6 space-y-2">
-<a class="pt-2 block text-muted-foreground no-underline transition-colors hover:text-foreground focus-visible:outline-offset-[-1px]" href="#E">E</a><a class="pt-2 block text-muted-foreground no-underline transition-colors hover:text-foreground focus-visible:outline-offset-[-1px]" href="#M">M</a>
+<a class="pt-2 block text-muted-foreground no-underline transition-colors hover:text-foreground focus-visible:outline-offset-[-1px]" href="#A">A</a><a class="pt-2 block text-muted-foreground no-underline transition-colors hover:text-foreground focus-visible:outline-offset-[-1px]" href="#C">C</a><a class="pt-2 block text-muted-foreground no-underline transition-colors hover:text-foreground focus-visible:outline-offset-[-1px]" href="#D">D</a><a class="pt-2 block text-muted-foreground no-underline transition-colors hover:text-foreground focus-visible:outline-offset-[-1px]" href="#E">E</a><a class="pt-2 block text-muted-foreground no-underline transition-colors hover:text-foreground focus-visible:outline-offset-[-1px]" href="#G">G</a><a class="pt-2 block text-muted-foreground no-underline transition-colors hover:text-foreground focus-visible:outline-offset-[-1px]" href="#I">I</a><a class="pt-2 block text-muted-foreground no-underline transition-colors hover:text-foreground focus-visible:outline-offset-[-1px]" href="#L">L</a><a class="pt-2 block text-muted-foreground no-underline transition-colors hover:text-foreground focus-visible:outline-offset-[-1px]" href="#M">M</a><a class="pt-2 block text-muted-foreground no-underline transition-colors hover:text-foreground focus-visible:outline-offset-[-1px]" href="#O">O</a><a class="pt-2 block text-muted-foreground no-underline transition-colors hover:text-foreground focus-visible:outline-offset-[-1px]" href="#P">P</a><a class="pt-2 block text-muted-foreground no-underline transition-colors hover:text-foreground focus-visible:outline-offset-[-1px]" href="#R">R</a><a class="pt-2 block text-muted-foreground no-underline transition-colors hover:text-foreground focus-visible:outline-offset-[-1px]" href="#S">S</a><a class="pt-2 block text-muted-foreground no-underline transition-colors hover:text-foreground focus-visible:outline-offset-[-1px]" href="#T">T</a><a class="pt-2 block text-muted-foreground no-underline transition-colors hover:text-foreground focus-visible:outline-offset-[-1px]" href="#U">U</a><a class="pt-2 block text-muted-foreground no-underline transition-colors hover:text-foreground focus-visible:outline-offset-[-1px]" href="#V">V</a><a class="pt-2 block text-muted-foreground no-underline transition-colors hover:text-foreground focus-visible:outline-offset-[-1px]" href="#W">W</a>
 </div>
 </aside>
         </main>
